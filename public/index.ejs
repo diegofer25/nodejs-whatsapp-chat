@@ -29,6 +29,20 @@
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="http://localhost:8080/socket.io/socket.io.js"></script>
 	<script src="/js/chat-system.js"></script>
+	<script>
+		new chatSystem({
+			input: document.getElementById('text-input'),
+			button: document.getElementById('send'),
+			box: document.getElementById('box-chat'),
+			userDisplay: document.getElementById('user'),
+			io: io('http://localhost:8080', {
+				transports: ['websocket', 'polling', 'flashsocket']
+			}),
+			user: prompt('Bem vindo ao WathsApp Chat, por favor informe um nickname: '),
+			axios
+		}).init()
+
+	</script>
 </body>
 
 </html>

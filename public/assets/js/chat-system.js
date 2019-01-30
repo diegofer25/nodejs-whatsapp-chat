@@ -41,20 +41,22 @@ class chatSystem {
 	sendMessage (message) {
 		const vm = this
 		vm.loading(true)
+		message.timestamp = new Date().getTime()
 		vm.http.post('/sendmessage', message).then(({ error }) => {
 			if (!error) return vm.popMessage(message)
-			console.log(response)
+			console.log(error.message)
+			throw error.message
 		}).catch(err => {
-			console.log(err)
+			console.error(err)
 			alert('Ocorreu um erro na comunicação com o servidor')
 		}).then(() => {
 			vm.loading(false)
 		})		
 	}
 
-	popMessage (message) {
+	popMessage ({ user, text, timestamp }) {
 		const vm = this
-		vm.box.innerHTML += `${message.user.nickname} disse: ${message.text}`
+		vm.box.innerHTML += `<small>(${ new Date(timestamp).toLocaleTimeString() })</small> <b>${user.nickname}</b> disse: ${text}`
 		vm.clear()
 	}
 
@@ -68,13 +70,3 @@ class chatSystem {
 		this.input.value = ''
 	}
 }
-
-new chatSystem({
-	input: document.getElementById('text-input'),
-	button: document.getElementById('send'),
-	box: document.getElementById('box-chat'),
-	userDisplay: document.getElementById('user'),
-	io: io('http://localhost:8080', {transports: ['websocket', 'polling', 'flashsocket']}),
-	user: prompt('Bem vindo ao WathsApp Chat, por favor informe um nickname: '),
-	axios
-}).init()
