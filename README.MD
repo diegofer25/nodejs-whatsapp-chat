@@ -1,3 +1,6 @@
-npm i
-npm i -g nodemon
-npm run start
+# Instalação
+$ npm i
+$ npm i -g nodemon
+
+# RUN
+$ npm run start
