@@ -16,12 +16,14 @@
 
 	<div class="container">
 		<h1>WathsApp Chat</h1>
-		<h2 id="user"></h2>
-		<div class="window">
-			<div id="box-chat"></div>
-			<div class="input">
-				<input id="text-input" type="text">
-				<button id="send">ENVIAR</button>
+		<div id="start" style="display: none;">
+			<h2 id="user"></h2>
+			<div class="window">
+				<div id="box-chat"></div>
+				<div class="input">
+					<input id="text-input" type="text">
+					<button id="send">ENVIAR</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -35,6 +37,7 @@
 			button: document.getElementById('send'),
 			box: document.getElementById('box-chat'),
 			userDisplay: document.getElementById('user'),
+			start: document.getElementById('start'),
 			io: io('http://localhost:8080', {
 				transports: ['websocket', 'polling', 'flashsocket']
 			}),
