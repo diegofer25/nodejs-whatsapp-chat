@@ -1,7 +1,11 @@
+/**
+ * @Author Diego Lamarão
+ */
+
 module.exports = ({ app, socket }) => {
 
 	app.get('/', (req, res) => {
-		res.render('index', { title: 'Meu WhatsApp' })
+		res.render('index')
 	})
 
 	app.post('/sendmessage', (req, res) => {
