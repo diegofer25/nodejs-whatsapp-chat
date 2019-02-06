@@ -12,6 +12,8 @@ module.exports = class NodeServer {
 		const vm = this
 		const { dependencies, files } = vm
 
+		vm.set('port', process.env.PORT || 8080)
+
 		vm.createServer(dependencies)
 
 		vm.setRender(dependencies)
@@ -62,9 +64,9 @@ module.exports = class NodeServer {
 		routes(dependencies)
 	}
 
-	startServer ({ server }) {
-		server.listen(8080, '0.0.0.0', () => {
-			console.log('Servidor Inciado: http://localhost:8080')
+	startServer ({ server, port }) {
+		server.listen(port, () => {
+			console.log('Servidor Inciado: http://localhost:' + port)
 		})
 	}
 }
