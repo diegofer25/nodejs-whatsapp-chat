@@ -21,6 +21,8 @@ module.exports = class NodeServer {
 		vm.startRoutes({ dependencies, files })
 
 		vm.startServer(dependencies)
+
+		return vm
 	}
 
 	set (name, dependencie) {
@@ -35,10 +37,10 @@ module.exports = class NodeServer {
 		this.set('socket', io.listen(server))
 	}
 
-	setRender ({ app, dir }) {
+	setRender ({ app, dir, path }) {
 		app.use((req, res, next) => {
 			res.render = (view) => {
-				res.sendFile(view + '.html', { root: dir + '/public/' })
+				res.sendFile(view + '.html', { root: path.join(dir, '/templates/') })
 			}
 			next()
 		})

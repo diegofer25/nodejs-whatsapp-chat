@@ -4,7 +4,7 @@
 
 module.exports = ({ app, socket }) => {
 
-	app.get('/', (req, res) => {
+	app.get('*', (req, res) => {
 		res.render('index')
 	})
 
